@@ -65,9 +65,9 @@
           if(!valid) return false;
           getLogin(this.loginForm.username, this.loginForm.password).then(res => {
             const data = res.data;
-            if(data.meta.status !== 200) return this.$message(data.meta.msg);
-            this.$message(data.meta.msg);
-          //  存储token
+            if(data.meta.status !== 200) return this.$message.error(data.meta.msg);
+            this.$message.success(data.meta.msg);
+            //  存储token
             sessionStorage.setItem('token', data.data.token)
             this.$router.push('/home');
           })
