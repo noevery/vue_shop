@@ -3,7 +3,7 @@ import { request } from './request'
 // 用户数据列表
 export function getUserList(query, pagenum, pagesize) {
   return request({
-    url: '/users',
+    url: 'users',
     params: {
       query,
       pagenum,
@@ -19,11 +19,11 @@ export function modifyUserStatus(uld, type) {
   })
 }
 // 添加用户
-export function addUsers(params) {
+export function addUsers(data) {
   return request({
     url: 'users',
     method: 'post',
-     params // : {
+     data // : {
     //   username,
     //   password,
     //   email,
@@ -34,15 +34,15 @@ export function addUsers(params) {
 //根据用户id查询
 export function getUserId(id) {
   return request({
-    url: '/users/' + id
+    url: 'users/' + id
   })
 }
 // 修改用户信息
 export function editUser(id, email, mobile) {
   return request({
-    url: '/users/' + id,
+    url: 'users/' + id,
     method: 'put',
-    params: {
+    data: {
       email,
       mobile
     }
@@ -51,7 +51,17 @@ export function editUser(id, email, mobile) {
 // 删除用户
 export function deleteUser(id) {
   return request({
-    url: '/users/' + id,
+    url: 'users/' + id,
     method: 'delete'
+  })
+}
+// 分配用户角色
+export function allotUser(id, rid) {
+  return request({
+    url: 'users/' + id + '/role',
+    method: 'put',
+    data: {
+      rid
+    }
   })
 }

@@ -20,3 +20,8 @@ export function formCheck(value, formValue, reg, firstCheckValue, secondValue, c
     callback();
   }
 }
+// 递归获取三级权限的ID
+export function getRightsId(node, arr) {
+  if (!node.children) return arr.push(node.id);
+  node.children.forEach(item => getRightsId(item, arr));
+}

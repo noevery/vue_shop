@@ -1,7 +1,7 @@
 <template>
   <div>
 <!--    面包屑-->
-    <elment-break />
+    <elment-break :breakList="breakList" />
 <!--        卡片视图-->
     <elment-card :userQuery.sync="userQuery" />
 <!--        表格-->
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import ElmentBreak from './usersComps/ElmentBreak'
+  import ElmentBreak from 'components/content/elBreak/ElmentBreak'
   import ElmentCard from './usersComps/ElementCard'
   import ElmentTab from './usersComps/ElementTab'
   import ElementPage from './usersComps/ElementPage'
@@ -32,6 +32,7 @@
     },
     data() {
       return {
+        breakList: ['用户管理', '用户列表'],
         userQuery: {
           query: '',
           pagenum: 1,
@@ -51,7 +52,6 @@
         let pagesize = this.userQuery.pagesize;
         getUserList(query, pagenum, pagesize).then(res => {
           const data = res.data;
-          console.log(res);
           if (data.meta.status !== 200) return data.meta.msg;
           this.total = data.data.total;
           this.userList = data.data.users;

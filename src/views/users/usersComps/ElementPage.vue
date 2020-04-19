@@ -3,10 +3,12 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="userQuery.pagenum"
-          :page-sizes="[2, 4, 6, 8]"
+          :page-sizes="[2, 5, 6, 8]"
           :page-size="userQuery.pagesize"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="total">
+          :total="total"
+          background
+          :hide-on-single-page="isHide">
   </el-pagination>
 </template>
 
@@ -25,6 +27,11 @@
         default() {
           return 0
         }
+      }
+    },
+    data() {
+      return {
+        isHide: false
       }
     },
     methods: {

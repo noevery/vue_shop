@@ -87,8 +87,8 @@
         //  562162421@qq.com
         this.$refs.addUserFormRef.validate(valid => {
           if (!valid) return ;
-          addUsers(this.addUserForm).then(res => {
-            console.log(this.addUserForm);
+          addUsers(this.userForm).then(res => {
+            console.log(this.userForm);
             console.log(res);
             const data = res.data;
             if (data.meta.status !== 201) return this.$message.error(data.meta.msg);
