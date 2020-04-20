@@ -36,7 +36,7 @@
         userQuery: {
           query: '',
           pagenum: 1,
-          pagesize: 2
+          pagesize: 4
         },
         userList: [],
         total: 0
@@ -47,10 +47,7 @@
     },
     methods: {
       getUserList() {
-        let query = this.userQuery.query;
-        let pagenum = this.userQuery.pagenum;
-        let pagesize = this.userQuery.pagesize;
-        getUserList(query, pagenum, pagesize).then(res => {
+        getUserList(this.userQuery).then(res => {
           const data = res.data;
           if (data.meta.status !== 200) return data.meta.msg;
           this.total = data.data.total;

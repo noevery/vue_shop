@@ -164,4 +164,7 @@
     margin-top: 20px;
     font-size: 12px;
   }
+  .el-dialog  p {
+    margin: 10px 0;
+  }
 </style>

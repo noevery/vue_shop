@@ -1,14 +1,14 @@
 import { request } from './request'
 
 // 用户数据列表
-export function getUserList(query, pagenum, pagesize) {
+export function getUserList(params) {
   return request({
     url: 'users',
-    params: {
-      query,
-      pagenum,
-      pagesize
-    }
+     params //: {
+    //   query,
+    //   pagenum,
+    //   pagesize
+    // }
   })
 }
 // 修改用户状态
