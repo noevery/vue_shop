@@ -56,6 +56,7 @@
           <el-input v-model="addCateForm.cat_name"></el-input>
         </el-form-item>
         <el-form-item label="父级名称">
+<!--          级联选择框-->
           <el-cascader
                   :options="parentCate"
                   :props="parentProps"
@@ -134,6 +135,7 @@
         },
       //  获取父级分类
         parentCate: [],
+        //  级联选择框的配置选项
         parentProps: {
           expandTrigger: 'hover',
           label: 'cat_name',
