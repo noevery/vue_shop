@@ -234,8 +234,9 @@
                   this.modifyParamsForm.attr_id,
                   this.modifyParamsForm.attr_name,
                   this.modifyParamsForm.attr_sel,
-                  this.modifyParamsForm.attr_vals,
+                  this.modifyParamsForm.attr_vals.join(' '),
           );
+          console.log(this.modifyParamsForm);
           this.getCateParams(this.cateId, this.activeTabsName)
           this.modifyParamsDialog = false
         });
@@ -329,7 +330,10 @@
     //  编辑提交参数
       async modifyCateParams(id, attrId, attr_name, attr_sel, attr_vals) {
         const { data: res } = await modifyCateParams(id, attrId, attr_name, attr_sel, attr_vals);
+        console.log(res);
         if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
+        this.$message.success(res.meta.msg)
+
       },
     //  删除参数
       async deleteParams(attr_id) {

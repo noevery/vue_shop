@@ -9,6 +9,8 @@ const Rights = () => import('views/rights/Rights')
 const Roles = () => import('views/roles/Roles')
 const Cate = () => import('views/goods/Cate')
 const Params = () => import('views/goods/Params')
+const GoodsList = () => import('views/goods/GoodsList')
+const AddGoods = () => import('views/goods/childComps/AddGoods')
 
 Vue.use(VueRouter)
 
@@ -24,31 +26,39 @@ Vue.use(VueRouter)
     {
       path: '/home',
       component: Home,
-      redirect: '/home/welcome',
+      redirect: '/welcome',
       children: [
         {
-          path: '/home/welcome',
+          path: '/welcome',
           component: Welcome
         },
         {
-          path: '/home/users',
+          path: '/users',
           component: User
         },
         {
-          path: '/home/rights',
+          path: '/rights',
           component: Rights
         },
         {
-          path: '/home/roles',
+          path: '/roles',
           component: Roles
         },
         {
-          path: '/home/categories',
+          path: '/categories',
           component: Cate
         },
         {
-          path: '/home/params',
+          path: '/params',
           component: Params
+        },
+        {
+          path: '/goods',
+          component: GoodsList,
+        },
+        {
+          path: '/goods/add',
+          component: AddGoods
         }
       ]
     }

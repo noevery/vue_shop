@@ -23,13 +23,18 @@
                     :default-active="activePath">
 <!--              一级菜单-->
               <div class="collapse" @click="clickCollapse">|||</div>
-              <el-submenu :index="item.id + ''" v-for="item in menusList" :key="item.id">
+              <el-submenu :index="item.id + ''"
+                          v-for="item in menusList"
+                          :key="item.id">
                 <template slot="title">
                   <i :class="iconsObj[item.id]" class="icon_font"></i>
                   <span>{{item.authName}}</span>
                 </template>
 <!--                二级菜单-->
-                <el-menu-item :index="'/home/' + item2.path" v-for="item2 in item.children" :key="item2.id">
+                <el-menu-item :index="'/' + item2.path"
+                              v-for="item2 in item.children"
+                              :key="item2.id"
+                              mode="horizontal">
                   <template slot="title">
                     <i class="el-icon-menu"></i>
                     <span>{{item2.authName}}</span>
@@ -66,14 +71,15 @@
       }
     },
      created() {
-        this.getMenus();
+       this.getMenus();
      },
      computed: {
         iselAside() {
           return this.isCollapse ? '64px' : '200px'
         },
        activePath() {
-          return this.$route.path
+         const p = this.$route.path.split('/');
+         return '/' + p[1];
        }
      },
      methods: {
@@ -84,6 +90,7 @@
         },
        //点击折叠菜单
        clickCollapse() {
+         this.
           this.isCollapse = !this.isCollapse;
        },
        //网络请求

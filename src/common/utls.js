@@ -25,3 +25,4 @@ export function getRightsId(node, arr) {
   if (!node.children) return arr.push(node.id);
   node.children.forEach(item => getRightsId(item, arr));
 }
+

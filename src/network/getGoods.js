@@ -65,3 +65,25 @@ export function deleteParams(id, attrid) {
     method: 'delete'
   })
 }
+// 商品列表数据
+export function getGoodsList(params) {
+  return request({
+    url: 'goods',
+    params
+  })
+}
+//  删除商品
+export function deleteGoods(id) {
+  return request({
+    url: 'goods/' + id,
+    method: 'delete'
+  })
+}
+//  添加商品
+export function addGoods(data) {
+  return request({
+    url: 'goods',
+    method: 'post',
+    data
+  })
+}
