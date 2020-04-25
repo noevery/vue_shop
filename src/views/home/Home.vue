@@ -45,7 +45,7 @@
           </div>
         </el-aside>
         <el-main>
-          <router-view />
+            <router-view />
         </el-main>
       </el-container>
     </el-container>
@@ -53,7 +53,7 @@
 
 <script>
    // 网络请求
-   import {getMenus} from "network/getHome";
+   import { getMenus } from "network/getHome";
 
    export default {
     name: "Home",
@@ -90,7 +90,6 @@
         },
        //点击折叠菜单
        clickCollapse() {
-         this.
           this.isCollapse = !this.isCollapse;
        },
        //网络请求

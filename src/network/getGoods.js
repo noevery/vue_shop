@@ -24,6 +24,21 @@ export function getCateParams(id, sel) {
     }
   })
 }
+//编辑提交分类
+export function getEditParams(id, data) {
+  return request({
+    url: 'categories/' + id,
+    method: 'put',
+    data
+  })
+}
+//删除分类
+export function delCate(id) {
+  return request({
+    url: 'categories/' + id,
+    method: 'delete'
+  })
+}
 //  添加动态参数或者静态属性
 export function addCateParams(id, attr_name, attr_sel, attr_vals) {
   return request({
@@ -84,6 +99,14 @@ export function addGoods(data) {
   return request({
     url: 'goods',
     method: 'post',
+    data
+  })
+}
+//编辑提交商品
+export function getEditGoods(id, data) {
+  return request({
+    url: 'goods/' + id,
+    method: 'put',
     data
   })
 }

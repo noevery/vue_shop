@@ -33,7 +33,7 @@
           <template v-slot="scope">
             <el-button type="primary"
                        icon="el-icon-edit"
-                       size="mini" />
+                       size="mini" @click="btnEditGoods(scope.row)"/>
             <el-button type="danger"
                        icon="el-icon-delete"
                        size="mini"
@@ -52,13 +52,40 @@
               :total="total">
       </el-pagination>
     </el-card>
+<!--    编辑商品对话框-->
+    <el-dialog
+            title="提示"
+            :visible.sync="editGoodsDialog"
+            width="50%" @close="closeEditGoods">
+      <el-form :model="editGoodsForm"
+               :rules="editGoodsRules"
+               ref="editGoodsRef"
+               label-width="100px">
+        <el-form-item label="商品名称" prop="goods_name">
+          <el-input v-model="editGoodsForm.goods_name"></el-input>
+        </el-form-item>
+        <el-form-item label="商品价格" prop="goods_price">
+          <el-input type="number" v-model="editGoodsForm.goods_price"></el-input>
+        </el-form-item>
+        <el-form-item label="商品数量" prop="goods_number">
+          <el-input type="number" v-model="editGoodsForm.goods_number"></el-input>
+        </el-form-item>
+        <el-form-item label="商品重量" prop="goods_weight">
+          <el-input type="number" v-model="editGoodsForm.goods_weight"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editGoodsDialog = false">取 消</el-button>
+        <el-button type="primary" @click="editGoods">确 定</el-button>
+     </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
   import ElmentBreak from 'components/content/elBreak/ElmentBreak'
 
-  import { getGoodsList, deleteGoods } from "network/getGoods";
+  import { getGoodsList, deleteGoods, getEditGoods } from "network/getGoods";
 
   export default {
     name: "GoodsList",
@@ -76,7 +103,21 @@
         },
         //总条数
         total: null,
-        goodsList: []
+        goodsList: [],
+        editGoodsForm: {
+          goods_name: '',
+          goods_price: '',
+          goods_number: '',
+          goods_weight: '',
+        },
+        editGoodsDialog: false,
+        editId: '',
+        editGoodsRules: {
+          goods_name: [ { required: true, message: '请输入商品名称', trigger: 'blur' } ],
+          goods_price: [ { required: true, message: '请输入商品价格', trigger: 'blur' } ],
+          goods_number: [ { required: true, message: '请输入商品数量', trigger: 'blur' } ],
+          goods_weight: [ { required: true, message: '请输入商品重量', trigger: 'blur' } ]
+        }
       }
     },
     created() {
@@ -98,6 +139,25 @@
       query() {
         this.queryInfo.pagenum = 1;
         this.getGoodsList();
+      },
+      //编辑商品
+      btnEditGoods(row) {
+        this.editGoodsDialog = true;
+        this.editId = row.goods_id;
+        this.editGoodsForm.goods_name = row.goods_name;
+        this.editGoodsForm.goods_price = row.goods_price;
+        this.editGoodsForm.goods_number = row.goods_number;
+        this.editGoodsForm.goods_weight = row.goods_weight;
+      },
+      editGoods() {
+        this.$refs.editGoodsRef.validate(valid => {
+          if (!valid) return ;
+          this.getEditGoods(this.editId, this.editGoodsForm);
+          this.editGoodsDialog = false
+        })
+      },
+      closeEditGoods() {
+        this.$refs.editGoodsRef.resetFields();
       },
       //删除商品
       async delGoods(id) {
@@ -123,11 +183,17 @@
         this.total = res.data.total
       },
       //删除商品
-     async deleteGoods(id) {
+      async deleteGoods(id) {
         const { data: res } = await deleteGoods(id);
-       if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
+        if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
         this.$message.success(res.meta.msg);
-     }
+     },
+      async getEditGoods(id, data) {
+        const { data: res } = await getEditGoods(id, data);
+        console.log(res);
+        if (res.meta.status !== 200) return this.$message.error('失败！无接口');
+        this.$message.success(res.meta.msg);
+      }
     }
   }
 </script>

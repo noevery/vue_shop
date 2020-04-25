@@ -29,3 +29,39 @@ export function allotRights(roleld, rids) {
     }
   })
 }
+//添加角色
+export function getAddRole(roleId, roleName, roleDesc) {
+  return request({
+    url: 'roles',
+    method: 'post',
+    data: {
+      roleId,
+      roleName,
+      roleDesc
+    }
+  })
+}
+//编辑角色
+export function getEditRole(id, roleName, roleDesc) {
+  return request({
+    url: 'roles/' + id,
+    method: 'put',
+    data: {
+      roleName,
+      roleDesc
+    }
+  })
+}
+//根据id查询角色
+export function getQueryRole(id) {
+  return request({
+    url: 'roles/' + id
+  })
+}
+//删除角色
+export function delRole(id) {
+  return request({
+    url: 'roles/' + id,
+    method: 'delete'
+  })
+}

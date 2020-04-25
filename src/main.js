@@ -10,6 +10,8 @@ import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css'
+//引入进度条样式
+import 'nprogress/nprogress.css'
 
 
 Vue.config.productionTip = false;

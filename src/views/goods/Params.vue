@@ -184,11 +184,6 @@
         return this.activeTabsName === 'many' ? '动态参数' : '静态属性';
       }
     },
-    // watch: {
-    //   TableData() {
-    //     this.getCateParams(this.cateId, this.activeTabsName)
-    //   }
-    // },
     created() {
       this.getCate()
     },
@@ -236,8 +231,7 @@
                   this.modifyParamsForm.attr_sel,
                   this.modifyParamsForm.attr_vals.join(' '),
           );
-          console.log(this.modifyParamsForm);
-          this.getCateParams(this.cateId, this.activeTabsName)
+          this.getCateParams(this.cateId, this.activeTabsName);
           this.modifyParamsDialog = false
         });
       },
